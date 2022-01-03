@@ -1,0 +1,6 @@
+org\demo\springbootlogger\utils\ExternalSoapClientLoggerUtil.class
+org\demo\springbootlogger\utils\InternalRestClientLoggerUtil.class
+org\demo\springbootlogger\interceptors\ExternalClientLoggerInterceptor.class
+org\demo\springbootlogger\utils\InternalRestClientLoggerUtil$CustomHttpResponseWrapper.class
+org\demo\springbootlogger\utils\ExternalRestClientLoggerUtil.class
+org\demo\springbootlogger\utils\InternalRestClientLoggerUtil$CustomHttpRequestWrapper.class
