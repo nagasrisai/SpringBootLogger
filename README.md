@@ -5,22 +5,22 @@ This application logs internal flow data means it logs the data which was sent f
 to external server whether it would be any format(Rest/Soap), then depends on server it will converts.
 After Server completes its processing it sends back response to the post man, then internal flow logs ends.
 <br>
-$CURRENT_DATE_TIME$  INFO InternalRestClientLoggerUtil
-======================================== Internal Flow Starts ========================================
-Request URI: /<uri>
-Request Method: <HTTP METHODS>
-Request Headers: []
-Request Body: {}
-========================================
-...
-Logs as per SoapClientLogger/RestClientLogger
-...
-$CURRENT_DATE_TIME$  INFO InternalRestClientLoggerUtil     :
-========================================
-Response Status: <HTTP STATUS CODE>
-Response Headers: []
-Response Body: {}
-======================================== Internal Flow Ends ========================================
+$CURRENT_DATE_TIME$  INFO InternalRestClientLoggerUtil<br>
+======================================== Internal Flow Starts ========================================<br>
+Request URI: /<uri> <br>
+Request Method: <HTTP METHODS> <br>
+Request Headers: [] <br>
+Request Body: {} <br>
+======================================== <br>
+... <br>
+Logs as per SoapClientLogger/RestClientLogger <br>
+... <br>
+$CURRENT_DATE_TIME$  INFO InternalRestClientLoggerUtil     : <br>
+======================================== <br>
+Response Status: <HTTP STATUS CODE> <br>
+Response Headers: [] <br>
+Response Body: {} <br>
+======================================== Internal Flow Ends ======================================== <br>
 </p>
 
 
