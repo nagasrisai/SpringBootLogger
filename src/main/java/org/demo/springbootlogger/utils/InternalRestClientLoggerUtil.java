@@ -74,6 +74,16 @@ public class InternalRestClientLoggerUtil implements Filter {
         return headers.toString();
     }
 
+    /**
+     * CustomHttpRequestWrapper will extend HttpServletRequestWrapper
+     *Use wrapper to modify request parameters in servlet filter.
+     * It will help to servlet read request body twice.
+     * Using below given HttpServletRequestWrapper,
+     * you can read HTTP request body and then the servlet can still read it later.
+     * Essentially, request body content is cached inside wrapper
+     * object so it can be N number of times in complete request lifecycle.
+     */
+
     private class CustomHttpRequestWrapper extends HttpServletRequestWrapper {
 
         private byte[] byteArray;
@@ -106,6 +116,12 @@ public class InternalRestClientLoggerUtil implements Filter {
             return httpRequestBody;
         }
     }
+
+    /**
+     * CustomHttpRequestWrapper will extend HttpServletResponseWrapper
+     *Use wrapper to modify response parameters in servlet filter.
+     * It will help to servlet read response body twice.
+     */
 
     private class CustomHttpResponseWrapper extends HttpServletResponseWrapper {
 

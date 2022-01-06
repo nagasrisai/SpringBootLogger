@@ -67,7 +67,7 @@ public class ExternalSoapClientLoggerUtil extends ClientInterceptorAdapter {
      * the Response is converted into string and uses UTF_8 format.
      * @return {@link super.handleResponse()}
      * @throws WebServiceClientException
-     */
+     **/
 
     @Override
     public boolean handleResponse(MessageContext messageContext) throws WebServiceClientException {
