@@ -6,7 +6,7 @@ to external server whether it would be any format(Rest/Soap), then depends on se
 After Server completes its processing it sends back response to the post man, then internal flow logs ends.
 <br>
 $CURRENT_DATE_TIME$  INFO InternalRestClientLoggerUtil<br>
-======================================== Internal Flow Starts ========================================<br>
+====================== Internal Flow Starts =========================<br>
 Request URI: /<uri> <br>
 Request Method: <HTTP METHODS> <br>
 Request Headers: [] <br>
@@ -20,7 +20,7 @@ $CURRENT_DATE_TIME$  INFO InternalRestClientLoggerUtil     : <br>
 Response Status: <HTTP STATUS CODE> <br>
 Response Headers: [] <br>
 Response Body: {} <br>
-======================================== Internal Flow Ends ======================================== <br>
+====================== Internal Flow Ends ========================= <br>
 </p>
 
 
