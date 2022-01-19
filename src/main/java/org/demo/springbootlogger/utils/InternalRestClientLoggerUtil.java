@@ -1,4 +1,4 @@
-package org.demo.springbootlogger.utils;
+package org.sds.springbootlogger.utils;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.output.TeeOutputStream;
@@ -36,6 +36,7 @@ public class InternalRestClientLoggerUtil implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 
         CustomHttpRequestWrapper requestWrapper = new CustomHttpRequestWrapper((HttpServletRequest) servletRequest);
+
         StringBuilder requestBuilder = new StringBuilder();
         requestBuilder.append("\n======================================== Internal Flow Starts ========================================")
                 .append("\nRequest URI: ").append(requestWrapper.getRequestURI())
@@ -75,9 +76,9 @@ public class InternalRestClientLoggerUtil implements Filter {
     }
 
     /**
-     * CustomHttpRequestWrapper will extend HttpServletRequestWrapper
-     *Use wrapper to modify request parameters in servlet filter.
-     * It will help to servlet read request body twice.
+     * CustomHttpRequestWrapper extending HttpServletRequestWrapper
+     * is used to modify request parameters in servlet filter.
+     * It will help to servlet read request body.
      * Using below given HttpServletRequestWrapper,
      * you can read HTTP request body and then the servlet can still read it later.
      * Essentially, request body content is cached inside wrapper
@@ -93,7 +94,7 @@ public class InternalRestClientLoggerUtil implements Filter {
             try {
                 byteArray = IOUtils.toByteArray(request.getInputStream());
             } catch (Exception e) {
-                log.error(e.getMessage());
+                e.printStackTrace();
             }
         }
 
@@ -107,20 +108,25 @@ public class InternalRestClientLoggerUtil implements Filter {
         }
 
         public String getHttpRequestBody() {
-            String httpRequestBody = null;
+            String httpRequestBody = "";
             try {
-                httpRequestBody = new JSONParser(new String(getByteArray())).parse().toString();
+                String str = new String(getByteArray());
+                if (!str.isEmpty()) {
+                    httpRequestBody = new JSONParser(str).parse().toString();
+                }
             } catch (ParseException e) {
-                log.error(e.getMessage());
+                log.error("HttpRequestBody Parsing Exception: " + e.getMessage());
             }
             return httpRequestBody;
         }
     }
 
     /**
-     * CustomHttpRequestWrapper will extend HttpServletResponseWrapper
-     *Use wrapper to modify response parameters in servlet filter.
-     * It will help to servlet read response body twice.
+     * CustomHttpRequestWrapper extending HttpServletResponseWrapper
+     * is used to modify response parameters in servlet filter.
+     * It will help to servlet read response body.
+     * Using below given HttpServletResponseWrapper,
+     * you can read HTTP response body and then the servlet can still read it later.
      */
 
     private class CustomHttpResponseWrapper extends HttpServletResponseWrapper {
