@@ -1,4 +1,4 @@
-package org.demo.springbootlogger.utils;
+package org.sds.springbootlogger.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,9 +11,9 @@ import org.springframework.util.StreamUtils;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-/***
+/**
  * Implementation of this ExternalClientLoggerUtil class uses the interface
- * {@linkplain org.springframework.http.client.ClientHttpRequestInterceptor} for logging Outbound rest request
+ * {@linkplain ClientHttpRequestInterceptor} for logging Outbound rest request
  * and inbound rest response.
  * This is util class will hit the external server and sends the request to external server and process it
  * and gets response from the server.
@@ -25,7 +25,7 @@ public class ExternalRestClientLoggerUtil implements ClientHttpRequestIntercepto
 
     private static final Logger log = LoggerFactory.getLogger(ExternalRestClientLoggerUtil.class);
 
-    /** This class Overrides {@link #intercept(HttpRequest, byte[], ClientHttpRequestExecution)} methods from {@linkplain org.springframework.http.client.ClientHttpRequestInterceptor}
+    /** This class Overrides {@link #intercept(HttpRequest, byte[], ClientHttpRequestExecution)} methods from {@linkplain ClientHttpRequestInterceptor}
      *{@link HttpRequest} catches the requested data and passes to the {@link #logRequest(HttpRequest, byte[])}
      * will used to format the data.
      * {@link ClientHttpResponse} will gives us response from the external server and will passes
@@ -39,17 +39,15 @@ public class ExternalRestClientLoggerUtil implements ClientHttpRequestIntercepto
          */
         logRequest(request, body);
         /**
-         Here response is final which stores the result from external server.
+         Here response is final which stores the response from server.
          */
         final ClientHttpResponse response = execution.execute(request, body);
         /**
-         * passes the result to the logResponse method to format the data to log it into the console.
+         * passes the result to the logResponse method to log data in formatted way.
          */
         logResponse(response);
         return response;
     }
-
-
 
     private void logRequest(HttpRequest request, byte[] body) {
 
