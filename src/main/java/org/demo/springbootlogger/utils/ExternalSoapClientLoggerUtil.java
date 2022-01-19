@@ -1,4 +1,4 @@
-package org.demo.springbootlogger.utils;
+package org.sds.springbootlogger.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * Implementation of ExternalSoapClientLoggerUtil class
- * uses interface {@link org.springframework.ws.client.support.interceptor.ClientInterceptorAdapter}
+ * uses interface {@link ClientInterceptorAdapter}
  * From this interface we are overriding methods like
  * {@link #handleFault(MessageContext)},{@link #handleRequest(MessageContext)}, {@link #handleResponse(MessageContext)}
  * This class is used to hit external server,
@@ -25,19 +25,12 @@ import java.nio.charset.StandardCharsets;
  */
 public class ExternalSoapClientLoggerUtil extends ClientInterceptorAdapter {
 
-    /**
-     * Both Logger and LoggerFactor is imported from {@link org.slf4j.Logger}
-     * which uses Slf4j and logback to log into the console.
-     */
-
     private static final Logger log = LoggerFactory.getLogger(ExternalSoapClientLoggerUtil.class);
 
     /**
-     *
-     * @param messageContext will have getRequest() method is used to get Requested data which was
-     *  sent to external server.
-     *  the Request is converted into string and uses UTF_8 format.
-     * @return {@link super.handleRequest()}
+     * @param messageContext will have getRequest() method is used to get Requested data which was sent to server.
+     * The Request is converted into string and uses UTF_8 format.
+     * @return {@code super.handleRequest(messageContext)}
      * @throws WebServiceClientException
      */
 
@@ -61,11 +54,9 @@ public class ExternalSoapClientLoggerUtil extends ClientInterceptorAdapter {
     }
 
     /**
-     *
-     * @param messageContext will have the getResponse method which
-     * returns the response data from the external server.
-     * the Response is converted into string and uses UTF_8 format.
-     * @return {@link super.handleResponse()}
+     * @param messageContext will have the getResponse method which returns the response data from the server.
+     * The Response is converted into string and uses UTF_8 format.
+     * @return {@code super.handleResponse(messageContext)}
      * @throws WebServiceClientException
      **/
 
@@ -89,8 +80,8 @@ public class ExternalSoapClientLoggerUtil extends ClientInterceptorAdapter {
     }
 
     /**
-     *This method {@link #handleFault(MessageContext)} will invoke when exception occurs.
-     * @return {@link super.handleFault()}
+     * This method will invoke when {@link org.springframework.ws.client.core.WebServiceTemplate} gets a fault response.
+     * @return {@code super.handleFault(messageContext)}
      * @throws WebServiceClientException
      */
 
@@ -104,7 +95,7 @@ public class ExternalSoapClientLoggerUtil extends ClientInterceptorAdapter {
             StringBuilder faultResponseBuilder = new StringBuilder();
             faultResponseBuilder.append("\n======================================== INBOUND SOAP FAULT RESPONSE ========================================")
                     .append("\nResponse Status: ").append(getSoapClientResponseStatus())
-                    .append("\nFault Response Body: ").append(responsePayload)
+                    .append("\nFaultResponse Body: ").append(responsePayload)
                     .append("\n=======================================================================================================");
             log.info(faultResponseBuilder.toString());
         } catch (Exception e) {
